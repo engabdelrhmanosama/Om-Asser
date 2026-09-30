@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noury 🧸🌍</title>
+    <!-- خطوط جوجل عربية وأنيقة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4b72;
+            --bg-color: #fff5f7;
+            --card-bg: #ffffff;
+            --text-color: #4a4a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* قلوب طايرة في الخلفية */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* شاشة تسجيل الدخول */
+        .login-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 75, 114, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+
+        .login-card h1 {
+            font-family: 'Reem Kufi', sans-serif;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffd1dc;
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .login-card input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .login-card button, .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 75, 114, 0.4);
+            transition: 0.3s transform, 0.3s background;
+        }
+
+        .login-card button:hover, .btn:hover {
+            transform: translateY(-2px);
+            background: #e03e61;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* المحتوى الرئيسي */
+        .container {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* مشغل الأغنية */
+        .music-player {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto 30px auto;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        /* الرسالة الكبيرة */
+        .love-letter {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            position: relative;
+            border-right: 5px solid var(--primary-color);
+            white-space: pre-wrap;
+        }
+
+        /* ألبوم الصور */
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            max-width: 350px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .gallery-item p {
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            min-width: 250px;
+        }
+
+        /* لوحة التحكم للأدمن */
+        .admin-panel {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 700px;
+            z-index: 10;
+        }
+
+        .admin-panel h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group textarea, .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .photo-input-group {
+            border: 1px dashed var(--primary-color);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .gallery-item img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="hearts-bg" id="heartsCanvas"></canvas>
+
+    <!-- شاشة الباسورد -->
+    <div class="login-card" id="loginCard">
+        <h1>Noury 🧸🌍</h1>
+        <p style="margin-bottom: 15px; color: #777;">اكتبي السر عشان تفتحي قلبي ❤️</p>
+        <input type="password" id="passInput" placeholder="أدخلي الباسورد...">
+        <button onclick="checkPassword()">دخول ✨</button>
+        <p class="error-msg" id="errorMsg">الباسورد مش صح يا حلوة! 🙈</p>
+    </div>
+
+    <!-- الصفحة الرئيسية للبت (Noury) -->
+    <div class="container" id="mainContent">
+        <header>
+            <h1>Noury 🧸🌍</h1>
+            <p>أغلى حاجة في حياتي ❤️</p>
+        </header>
+
+        <!-- مشغل اغنية توليت - حبيبي ده عليه حاجات -->
+        <div class="music-player">
+            <span>🎵 حبيبي ده عليه حاجات - TUL8TE</span>
+            <audio controls id="bgMusic" loop>
+                <!-- يمكنك تغيير الرابط برابط صوت مباشر للأغنية لو متاح -->
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                متصفحك لا يدعم الصوت.
+            </audio>
+        </div>
+
+        <!-- الرسالة الكبيرة -->
+        <div class="love-letter" id="displayLetter">
+            الرسالة لسة متكتبتش.. ادخل كأدمن واكتبها! ❤️️
+        </div>
+
+        <!-- ألبوم الصور -->
+        <div id="displayGallery">
+            <!-- الصور هتنزل هنا تلقائياً -->
+        </div>
+    </div>
+
+    <!-- لوحة التحكم (الادمن - ليك انت) -->
+    <div class="admin-panel" id="adminPanel">
+        <h2>لوحة التحكم الخاصة بـ "حب عمرك" 🛠️❤️</h2>
+        
+        <div class="form-group">
+            <label>الرسالة الكبيرة:</label>
+            <textarea id="adminLetter" rows="6" placeholder="اكتب كلامك الحلو هنا..."></textarea>
+        </div>
+
+        <hr style="margin: 20px 0;">
+
+        <h3>إضافة صور وكلام:</h3>
+        <div id="photoInputs">
+            <!-- خانات الصور -->
+        </div>
+        <button class="btn" onclick="addPhotoInput()" style="background: #28a745; margin-bottom: 20px;">+ إضافة صورة جديدة</button>
+
+        <br>
+        <button class="btn" onclick="saveAdminData()" style="width: 100%;">حفظ التعديلات ✨</button>
+    </div>
+
+    <script>
+        // أنيميشن القلوب الطايرة
+        const canvas = document.getElementById('heartsCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const hearts = [];
+        for (let i = 0; i < 25; i++) {
+            hearts.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 15 + 10,
+                speed: Math.random() * 1 + 0.5,
+                opacity: Math.random() * 0.5 + 0.3
+            });
+        }
+
+        function drawHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach(heart => {
+                ctx.fillStyle = `rgba(255, 75, 114, ${heart.opacity})`;
+                ctx.beginPath();
+                ctx.arc(heart.x, heart.y, heart.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+                heart.y -= heart.speed;
+                if (heart.y < -10) heart.y = canvas.height + 10;
+            });
+            requestAnimationFrame(drawHearts);
+        }
+        drawHearts();
+
+        // التحقق من الباسورد
+        function checkPassword() {
+            const pass = document.getElementById('passInput').value;
+            const loginCard = document.getElementById('loginCard');
+            const mainContent = document.getElementById('mainContent');
+            const adminPanel = document.getElementById('adminPanel');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (pass === '2952026') {
+                // دخول البت (Noury)
+                loginCard.style.display = 'none';
+                mainContent.style.display = 'block';
+                loadDataForUser();
+                document.getElementById('bgMusic').play(); // تشغيل الأغنية تلقائياً
+            } else if (pass === '112008') {
+                // دخول الأدمن (أنت)
+                loginCard.style.display = 'none';
+                adminPanel.style.display = 'block';
+                loadDataForAdmin();
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // إضافة خانة صورة جديدة في لوحة التحكم
+        function addPhotoInput(imgSrc = '', caption = '') {
+            const container = document.getElementById('photoInputs');
+            const div = document.createElement('div');
+            div.className = 'photo-input-group';
+            div.innerHTML = `
+                <div class="form-group">
+                    <label>اختر صورة من جهازك:</label>
+                    <input type="file" accept="image/*" class="img-file" onchange="previewImage(this)">
+                    <input type="hidden" class="img-base64" value="${imgSrc}">
+                    ${imgSrc ? `<img src="${imgSrc}" style="max-width: 100px; margin-top: 10px; border-radius: 8px;">` : ''}
+                </div>
+                <div class="form-group">
+                    <label>الكلام اللي جنب الصورة:</label>
+                    <input type="text" class="img-caption" value="${caption}" placeholder="اكتب ذكرياتكم هنا...">
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        // تحويل الصورة لرابط Base64 للحفظ
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    input.nextElementSibling.value = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // حفظ بيانات الأدمن في LocalStorage
+        function saveAdminData() {
+            const letter = document.getElementById('adminLetter').value;
+            const photoGroups = document.querySelectorAll('.photo-input-group');
+            const galleryData = [];
+
+            photoGroups.forEach(group => {
+                const imgSrc = group.querySelector('.img-base64').value;
+                const caption = group.querySelector('.img-caption').value;
+                if (imgSrc) {
+                    galleryData.push({ imgSrc, caption });
+                }
+            });
+
+            localStorage.setItem('noury_letter', letter);
+            localStorage.setItem('noury_gallery', JSON.stringify(galleryData));
+
+            alert('تم حفظ الرسالة والصور بنجاح! ❤️');
+            location.reload();
+        }
+
+        // تحميل البيانات في صفحة المستخدم (Noury)
+        function loadDataForUser() {
+            const letter = localStorage.getItem('noury_letter');
+            const gallery = JSON.parse(localStorage.getItem('noury_gallery') || '[]');
+
+            if (letter) {
+                document.getElementById('displayLetter').textContent = letter;
+            }
+
+            const galleryContainer = document.getElementById('displayGallery');
+            galleryContainer.innerHTML = '';
+
+            gallery.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="${item.imgSrc}" alt="ذكرياتنا">
+                    <p>${item.caption}</p>
+                `;
+                galleryContainer.appendChild(div);
+            });
+        }
+
+        // تحميل البيانات في لوحة التحكم (الأدمن)
+        function loadDataForAdmin() {
+            const letter = localStorage.getItem('noury_letter') || '';
+            const gallery = JSON.parse(localStorage.getItem('noury_gallery') || '[]');
+
+            document.getElementById('adminLetter').value = letter;
+            document.getElementById('photoInputs').innerHTML = '';
+
+            if (gallery.length === 0) {
+                addPhotoInput();
+            } else {
+                gallery.forEach(item => {
+                    addPhotoInput(item.imgSrc, item.caption);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
