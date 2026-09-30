@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noury 🧸🌍</title>
-    <!-- خطوط جوجل عربية وأنيقة -->
+    <!-- خطوط جوجل عربية أنيقة -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #ff4b72;
+            --secondary-color: #ffd1dc;
             --bg-color: #fff5f7;
             --card-bg: #ffffff;
-            --text-color: #4a4a4a;
+            --text-color: #333333;
         }
 
         * {
@@ -29,6 +30,7 @@
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
+            padding: 15px;
         }
 
         /* قلوب طايرة في الخلفية */
@@ -44,33 +46,34 @@
 
         /* شاشة تسجيل الدخول */
         .login-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 75, 114, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 75, 114, 0.25);
             text-align: center;
             max-width: 400px;
-            width: 90%;
-            backdrop-filter: blur(5px);
+            width: 100%;
+            backdrop-filter: blur(8px);
             z-index: 10;
+            border: 1px solid var(--secondary-color);
         }
 
         .login-card h1 {
             font-family: 'Reem Kufi', sans-serif;
             color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
         }
 
         .login-card input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ffd1dc;
-            border-radius: 10px;
+            padding: 14px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
             outline: none;
             text-align: center;
             font-size: 1.1rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             transition: 0.3s;
         }
 
@@ -83,8 +86,9 @@
             color: white;
             border: none;
             padding: 12px 30px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 75, 114, 0.4);
             transition: 0.3s transform, 0.3s background;
@@ -96,56 +100,75 @@
         }
 
         .error-msg {
-            color: red;
-            margin-top: 10px;
+            color: #d9534f;
+            margin-top: 15px;
             display: none;
+            font-weight: bold;
         }
 
         /* المحتوى الرئيسي */
         .container {
             display: none;
             width: 100%;
-            max-width: 900px;
-            padding: 20px;
+            max-width: 800px;
             z-index: 10;
+            padding-bottom: 50px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            margin-top: 10px;
         }
 
         header h1 {
             font-family: 'Reem Kufi', sans-serif;
             font-size: 3rem;
             color: var(--primary-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         /* مشغل الأغنية */
         .music-player {
             background: white;
-            padding: 15px 25px;
+            padding: 15px 20px;
             border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin: 0 auto 30px auto;
-            max-width: 500px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            max-width: 550px;
+            box-shadow: 0 8px 25px rgba(255, 75, 114, 0.15);
+            border: 1px solid var(--secondary-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .music-player span {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .music-player audio {
+            height: 35px;
+            max-width: 100%;
         }
 
         /* الرسالة الكبيرة */
         .love-letter {
             background: white;
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            line-height: 1.8;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            line-height: 2;
+            font-size: 1.25rem;
+            margin-bottom: 35px;
             position: relative;
-            border-right: 5px solid var(--primary-color);
+            border-right: 6px solid var(--primary-color);
             white-space: pre-wrap;
+            color: #444;
+            text-align: justify;
         }
 
         /* ألبوم الصور */
@@ -153,27 +176,30 @@
             background: white;
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 20px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
         }
 
         .gallery-item img {
             width: 100%;
-            max-width: 350px;
-            height: 300px;
+            max-width: 300px;
+            height: 250px;
             object-fit: cover;
             border-radius: 15px;
+            margin: 0 auto;
         }
 
         .gallery-item p {
             flex: 1;
             font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             min-width: 250px;
+            color: #555;
         }
 
         /* لوحة التحكم للأدمن */
@@ -181,7 +207,7 @@
             display: none;
             background: white;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 700px;
@@ -206,17 +232,19 @@
 
         .form-group textarea, .form-group input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
             outline: none;
+            font-size: 1rem;
         }
 
         .photo-input-group {
             border: 1px dashed var(--primary-color);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 15px;
+            background: #fffafa;
         }
 
         @media (max-width: 600px) {
@@ -226,6 +254,15 @@
             }
             .gallery-item img {
                 max-width: 100%;
+                height: 220px;
+            }
+            .music-player {
+                border-radius: 20px;
+                justify-content: center;
+            }
+            .love-letter {
+                font-size: 1.1rem;
+                padding: 20px;
             }
         }
     </style>
@@ -237,13 +274,13 @@
     <!-- شاشة الباسورد -->
     <div class="login-card" id="loginCard">
         <h1>Noury 🧸🌍</h1>
-        <p style="margin-bottom: 15px; color: #777;">اكتبي السر عشان تفتحي قلبي ❤️</p>
+        <p style="margin-bottom: 20px; color: #777;">اكتبي السر عشان تفتحي قلبي ❤️</p>
         <input type="password" id="passInput" placeholder="أدخلي الباسورد...">
         <button onclick="checkPassword()">دخول ✨</button>
         <p class="error-msg" id="errorMsg">الباسورد مش صح يا حلوة! 🙈</p>
     </div>
 
-    <!-- الصفحة الرئيسية للبت (Noury) -->
+    <!-- الصفحة الرئيسية لـ Noury -->
     <div class="container" id="mainContent">
         <header>
             <h1>Noury 🧸🌍</h1>
@@ -254,35 +291,32 @@
         <div class="music-player">
             <span>🎵 حبيبي ده عليه حاجات - TUL8TE</span>
             <audio controls id="bgMusic" loop>
-                <!-- يمكنك تغيير الرابط برابط صوت مباشر للأغنية لو متاح -->
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
                 متصفحك لا يدعم الصوت.
             </audio>
         </div>
 
-        <!-- الرسالة الكبيرة -->
-        <div class="love-letter" id="displayLetter">
-            الرسالة لسة متكتبتش.. ادخل كأدمن واكتبها! ❤️️
-        </div>
+        <!-- الرسالة الكبيرة الثابتة -->
+        <div class="love-letter" id="displayLetter">نوري اغلي حاجه في حياتي عايز اقولك وحشتيني اوي وحشني ضحكنا وهزارنا مهما اقعد اتكلم عنك مش هوصف حبي ليكي احسن بنت قبلتها في الدينا وقلبي اتعلق بيها كفايا لما ببص في عينك اصلا بنسي الدينا كلها يمكن احنا دلوقتي مش مع بعض بس هفضل احبك لحد ما اموت عشان انا محبتش غيرك ومش عايز غيرك في حياتي ومش قادر اتخيل حياتي من غيرك اصلا بحبك يا ام اسر 🌍❤️</div>
 
         <!-- ألبوم الصور -->
         <div id="displayGallery">
-            <!-- الصور هتنزل هنا تلقائياً -->
+            <!-- الصور هتظهر هنا تلقائياً -->
         </div>
     </div>
 
     <!-- لوحة التحكم (الادمن - ليك انت) -->
     <div class="admin-panel" id="adminPanel">
-        <h2>لوحة التحكم الخاصة بـ "حب عمرك" 🛠️❤️</h2>
+        <h2>لوحة التحكم الخاصة بك 🛠️❤️</h2>
         
         <div class="form-group">
-            <label>الرسالة الكبيرة:</label>
-            <textarea id="adminLetter" rows="6" placeholder="اكتب كلامك الحلو هنا..."></textarea>
+            <label>تعديل الرسالة الكبيرة:</label>
+            <textarea id="adminLetter" rows="6"></textarea>
         </div>
 
         <hr style="margin: 20px 0;">
 
-        <h3>إضافة صور وكلام:</h3>
+        <h3>إضافة أو تعديل الصور والكلام:</h3>
         <div id="photoInputs">
             <!-- خانات الصور -->
         </div>
@@ -300,11 +334,11 @@
         canvas.height = window.innerHeight;
 
         const hearts = [];
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 30; i++) {
             hearts.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 15 + 10,
+                size: Math.random() * 15 + 8,
                 speed: Math.random() * 1 + 0.5,
                 opacity: Math.random() * 0.5 + 0.3
             });
@@ -333,11 +367,11 @@
             const errorMsg = document.getElementById('errorMsg');
 
             if (pass === '2952026') {
-                // دخول البت (Noury)
+                // دخول Noury
                 loginCard.style.display = 'none';
                 mainContent.style.display = 'block';
                 loadDataForUser();
-                document.getElementById('bgMusic').play(); // تشغيل الأغنية تلقائياً
+                document.getElementById('bgMusic').play().catch(() => {});
             } else if (pass === '112008') {
                 // دخول الأدمن (أنت)
                 loginCard.style.display = 'none';
@@ -425,7 +459,8 @@
 
         // تحميل البيانات في لوحة التحكم (الأدمن)
         function loadDataForAdmin() {
-            const letter = localStorage.getItem('noury_letter') || '';
+            const currentLetter = document.getElementById('displayLetter').textContent;
+            const letter = localStorage.getItem('noury_letter') || currentLetter;
             const gallery = JSON.parse(localStorage.getItem('noury_gallery') || '[]');
 
             document.getElementById('adminLetter').value = letter;
