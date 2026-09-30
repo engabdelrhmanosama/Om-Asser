@@ -11,7 +11,6 @@
             --primary-color: #ff4b72;
             --secondary-color: #ffd1dc;
             --bg-color: #fff5f7;
-            --card-bg: #ffffff;
             --text-color: #333333;
         }
 
@@ -296,12 +295,12 @@
             </audio>
         </div>
 
-        <!-- الرسالة الكبيرة الثابتة -->
+        <!-- الرسالة الكبيرة الثابتة والمباشرة -->
         <div class="love-letter" id="displayLetter">نوري اغلي حاجه في حياتي عايز اقولك وحشتيني اوي وحشني ضحكنا وهزارنا مهما اقعد اتكلم عنك مش هوصف حبي ليكي احسن بنت قبلتها في الدينا وقلبي اتعلق بيها كفايا لما ببص في عينك اصلا بنسي الدينا كلها يمكن احنا دلوقتي مش مع بعض بس هفضل احبك لحد ما اموت عشان انا محبتش غيرك ومش عايز غيرك في حياتي ومش قادر اتخيل حياتي من غيرك اصلا بحبك يا ام اسر 🌍❤️</div>
 
         <!-- ألبوم الصور -->
         <div id="displayGallery">
-            <!-- الصور هتظهر هنا تلقائياً -->
+            <!-- الصور ستظهر هنا -->
         </div>
     </div>
 
@@ -358,9 +357,12 @@
         }
         drawHearts();
 
+        // النص الأساسي المكتوب في الكود
+        const defaultLetterText = "نوري اغلي حاجه في حياتي عايز اقولك وحشتيني اوي وحشني ضحكنا وهزارنا مهما اقعد اتكلم عنك مش هوصف حبي ليكي احسن بنت قبلتها في الدينا وقلبي اتعلق بيها كفايا لما ببص في عينك اصلا بنسي الدينا كلها يمكن احنا دلوقتي مش مع بعض بس هفضل احبك لحد ما اموت عشان انا محبتش غيرك ومش عايز غيرك في حياتي ومش قادر اتخيل حياتي من غيرك اصلا بحبك يا ام اسر 🌍❤️";
+
         // التحقق من الباسورد
         function checkPassword() {
-            const pass = document.getElementById('passInput').value;
+            const pass = document.getElementById('passInput').value.trim();
             const loginCard = document.getElementById('loginCard');
             const mainContent = document.getElementById('mainContent');
             const adminPanel = document.getElementById('adminPanel');
@@ -373,7 +375,7 @@
                 loadDataForUser();
                 document.getElementById('bgMusic').play().catch(() => {});
             } else if (pass === '112008') {
-                // دخول الأدمن (أنت)
+                // دخول الأدمن
                 loginCard.style.display = 'none';
                 adminPanel.style.display = 'block';
                 loadDataForAdmin();
@@ -402,7 +404,7 @@
             container.appendChild(div);
         }
 
-        // تحويل الصورة لرابط Base64 للحفظ
+        // معاينة الصورة وتحويلها
         function previewImage(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -413,7 +415,7 @@
             }
         }
 
-        // حفظ بيانات الأدمن في LocalStorage
+        // حفظ البيانات
         function saveAdminData() {
             const letter = document.getElementById('adminLetter').value;
             const photoGroups = document.querySelectorAll('.photo-input-group');
@@ -427,21 +429,19 @@
                 }
             });
 
-            localStorage.setItem('noury_letter', letter);
-            localStorage.setItem('noury_gallery', JSON.stringify(galleryData));
+            localStorage.setItem('noury_letter_final', letter);
+            localStorage.setItem('noury_gallery_final', JSON.stringify(galleryData));
 
-            alert('تم حفظ الرسالة والصور بنجاح! ❤️');
+            alert('تم حفظ التعديلات بنجاح! ❤️️');
             location.reload();
         }
 
-        // تحميل البيانات في صفحة المستخدم (Noury)
+        // تحميل البيانات لـ Noury
         function loadDataForUser() {
-            const letter = localStorage.getItem('noury_letter');
-            const gallery = JSON.parse(localStorage.getItem('noury_gallery') || '[]');
+            const letter = localStorage.getItem('noury_letter_final') || defaultLetterText;
+            const gallery = JSON.parse(localStorage.getItem('noury_gallery_final') || '[]');
 
-            if (letter) {
-                document.getElementById('displayLetter').textContent = letter;
-            }
+            document.getElementById('displayLetter').textContent = letter;
 
             const galleryContainer = document.getElementById('displayGallery');
             galleryContainer.innerHTML = '';
@@ -457,11 +457,10 @@
             });
         }
 
-        // تحميل البيانات في لوحة التحكم (الأدمن)
+        // تحميل البيانات للأدمن
         function loadDataForAdmin() {
-            const currentLetter = document.getElementById('displayLetter').textContent;
-            const letter = localStorage.getItem('noury_letter') || currentLetter;
-            const gallery = JSON.parse(localStorage.getItem('noury_gallery') || '[]');
+            const letter = localStorage.getItem('noury_letter_final') || defaultLetterText;
+            const gallery = JSON.parse(localStorage.getItem('noury_gallery_final') || '[]');
 
             document.getElementById('adminLetter').value = letter;
             document.getElementById('photoInputs').innerHTML = '';
